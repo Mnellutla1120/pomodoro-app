@@ -3,8 +3,8 @@
 let workTitle = document.getElementById('work');
 let breakTitle = document.getElementById('break');
 const sound = new Audio('Jungkook.mp3');
-let workTime = prompt("Type how many minutes you want to work (e.g. 25, 50, etc.):", 25);
-let breakTime = prompt("Type how long you want your breaks (e.g. 5, 10, etc.):", 5);
+let workTime;
+let breakTime;
 
 
 
@@ -12,7 +12,8 @@ let seconds = "00";
 
 // display
 window.onload = () => {
-    
+    workTime = prompt("Type how many minutes you want to work (e.g. 25, 50, etc.):", 25);
+    breakTime = prompt("Type how long you want your breaks (e.g. 5, 10, etc.):", 5);
 
     document.getElementById('minutes').innerHTML = workTime;
     document.getElementById('seconds').innerHTML = seconds;
