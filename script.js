@@ -1,5 +1,5 @@
 // variables
-
+let timerInterval;
 let workTitle = document.getElementById('work');
 let breakTitle = document.getElementById('break');
 const sound = new Audio('Jungkook.mp3');
@@ -38,14 +38,13 @@ function start() {
     // countdown
     let timerFunction = () => {
         //change the display
-        document.getElementById('minutes').innerHTML = workMinutes;
-        document.getElementById('seconds').innerHTML = seconds;
-
+        document.getElementById('minutes').innerHTML = workMinutes < 10 ? `0${workMinutes}` : workMinutes;
+        document.getElementById('seconds').innerHTML = seconds < 10 ? `0${seconds}` : seconds;
         // start
-        seconds = seconds - 1;
+        seconds--;
 
         if(seconds === 0) {
-            workMinutes = workMinutes - 1;
+            workMinutes--;
 
             if(workMinutes === -1 ){
                 if(breakCount % 2 === 0) {
@@ -68,9 +67,27 @@ function start() {
             }
             seconds = 59;
         }
-        
+       
+    };
+    clearInterval(timerInterval);
+    timerInterval = setInterval(timerFunction, 1000);
+  }
+    // start countdown
+    // 1000 = 1s
+    function resetTimer() {
+        // Stop the timer
+    clearInterval(timerInterval);
+
+    // Reset the timer display
+    document.getElementById('minutes').innerHTML = workTime < 10 ? `0${workTime}` : workTime;
+    document.getElementById('seconds').innerHTML = "00";
+
+    // Reset the active panel to 'work'
+    workTitle.classList.add('active');
+    breakTitle.classList.remove('active');
+
+    // Show the start button and hide the reset button
+    document.getElementById('start').style.display = "block";
+    document.getElementById('reset').style.display = "none";
     }
 
-    // start countdown
-    setInterval(timerFunction, 1000); // 1000 = 1s
-}
